@@ -7,7 +7,23 @@ const basename = path.basename(__filename);
 const config = envConfigs
 const db = {};
 
-let sequelize = new Sequelize(config.database, config.username, config.password, config); 
+let sequelize = new Sequelize(config.url, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+});
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Database connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 fs
   .readdirSync(__dirname)

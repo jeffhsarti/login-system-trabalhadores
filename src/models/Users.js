@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-const uuid = require("uuidv4");
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -29,37 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
       freezeTableName: true,
       tableName: "users",
-      hooks: {
-        beforeCreate: (record) => {
-          const id = uuid();
-          record.dataValues.id = id;
-
-          bcrypt.genSalt(8, (err, salt) => {
-            if (err) {
-              throw new Error(err);
-            }
-            bcrypt.hash(record.dataValues.password, salt, function (err, hash) {
-              if (err) {
-                throw new Error(err);
-              }
-              record.dataValues.password = hash;
-            });
-          });
-        },
-        beforeUpdate: (record) => {
-          bcrypt.genSalt(8, (err, salt) => {
-            if (err) {
-              throw new Error(err);
-            }
-            bcrypt.hash(record.dataValues.password, salt, function (err, hash) {
-              if (err) {
-                throw new Error(err);
-              }
-              record.dataValues.password = hash;
-            });
-          });
-        },
-      },
     }
   );
 
