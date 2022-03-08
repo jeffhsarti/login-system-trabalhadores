@@ -24,7 +24,7 @@
 <p>O sistema de autenticação e API de usuários está em desenvolvimento. Para maiores informações, consulta a guia <i>À Fazer</i></p>
 
 <h1 align="center" id="features">Funcionalidades e Demonstração da Aplicação</h1>
-<p>A aplicação pode ser acessada via <a href="" rel="noopener noreferrer" target="_blank">link</a>. A documentação da API pode ser encontrada <a href="" rel="noopener noreferrer" target="_blank">aqui</a>.</p>
+<p>A aplicação pode ser acessada via <a href="https://login-system-trabalhadores.herokuapp.com/" rel="noopener noreferrer" target="_blank">link</a>. A documentação da API pode ser encontrada <a href="https://login-system-trabalhadores.herokuapp.com/doc" rel="noopener noreferrer" target="_blank">aqui</a>.</p>
 
 <h1 align="center" id="technologies">Tecnologias utilizadas</h1>
 <p>A aplicação foi construída à partir do framework Express.js, que se utiliza do Node.js como plataforma. O banco de dados para a aplicação é um banco PostgreSQL e a tecnologia usada para geração dos tokens de autenticação é a jsonwebtoken. Consulte a lista de dependências no package.json para maiores informações sobre os pacotes utilizados.</p>
