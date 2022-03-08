@@ -8,14 +8,15 @@
 
 <h1 align="center" id="index">Índice</h1>
 
-* [Título](#title)
-* [Badges](#badges)
-* [Índice](#index)
-* [Descrição do Projeto](#project-description)
-* [Status do Projeto](#status)
-* [Funcionalidades e Demonstração da Aplicação](#features)
-* [Tecnologias utilizadas](#technologies)
-* [À Fazer](#to-do)
+- [Título](#title)
+- [Badges](#badges)
+- [Índice](#index)
+- [Descrição do Projeto](#project-description)
+- [Status do Projeto](#status)
+- [Funcionalidades e Demonstração da Aplicação](#features)
+- [Tecnologias utilizadas](#technologies)
+- [À Fazer](#to-do)
+- [Executando Localmente](#executing)
 
 <h1 align="center" id="project-description">Descrição do Projeto</h1>
 <p>Esse projeto tem o objetivo de oferecer uma API CRUD de usuários com uma rota de autenticação, servindo como base para uma aplicação maior, que está sendo definida pelo grupo Trabalhadores.</p>
@@ -35,14 +36,30 @@
 <h1 align="center" id="to-do">À Fazer</h1>
 <strong>Alta prioridade:</strong>
 
-- [ ] Testes Unitários  
-  - [ ] Validators 
-  - [ ] Controllers 
+- [ ] Testes Unitários
+  - [ ] Validators
+  - [ ] Controllers
   - [ ] Middlewares
 - [ ] Testes de Integração
   - [ ] Banco
 
 <strong>Média prioridade:</strong>
+
 - [ ] Serviço de Mailling
   - [ ] Confirmação de cadastro
   - [ ] Confirmação de alteração de dados
+
+<h1 align="center" id="executing">Executando Localmente</h1>
+<p>Para executar a aplicação localmente, alguns passos são necessários</p>
+
+- Instalar o Node.js e o gerenciador de pacotes NPM (https://nodejs.org/en/download/)
+- Faça um fork desse projeto
+- Navegue até a pasta raíz do projeto e execute o comando `npm ci`
+- Crie um arquivo chamado `.env` na pasta raíz do projeto e preencha-o de acordo com o modelo fornecido no arquivo .env.example
+- Ao configurar o .env com os dados do banco, execute o comando `npx sequelize-cli db:migrate` para migrar as Models para o banco de dados. Não é necessário criar as tabelas manualmente, mas caso prefira, a execução dessa etapa não será necessária.
+- Execute o comando `npm start`.
+
+<p>
+  Esse projeto está configurado para acessar um banco PostgreSQL. Caso queira utilizar outro banco, instale o driver de acesso do Node.js para o banco escolhido.
+  Para uma lista detalhada de bancos e drivers permitidos pela ORM Sequelize, consulte: <a href="https://sequelize.org/master/manual/getting-started.html" target="_blank" rel="noopener noreferrer">Sequelize Docs</a>.
+</p>
