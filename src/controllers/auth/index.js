@@ -1,16 +1,20 @@
 const express = require("express");
 const handle = require("express-async-handler");
 const validator = require("express-joi-validation").createValidator({});
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
 const { User } = require("../../models");
 const validators = require("../../validators");
+const config = require("../../../config/app");
 
 router.post(
   "/login",
   validator.body(validators.auth.login),
   handle(async (req, res) => {
+    /*  #swagger.tags = ['Auth']
+        #swagger.description = 'Endpoint to login with user credentials.' */
     try {
       const { username, password } = req.body;
       const user = await User.findOne({where: { username }});
@@ -18,7 +22,7 @@ router.post(
       if (user) {
         const isPasswordValid = await user.validatePassword(password);
         if (isPasswordValid) {
-          const token = jwt.sign({ username: req.body.username }, 'trabalhadores', {
+          const token = jwt.sign({ username: username }, config.secret, {
             expiresIn: '1d'
           });
           user.update({last_login: new Date()});
