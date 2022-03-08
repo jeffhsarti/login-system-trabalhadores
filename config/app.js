@@ -1,7 +1,6 @@
-const {
-  PORT
-} = process.env;
+const { PORT, JWT_SECRET } = process.env;
 
 module.exports = {
-  port: PORT
+  port: PORT,
+  secret: JWT_SECRET,
 };
