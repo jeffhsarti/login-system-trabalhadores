@@ -14,7 +14,8 @@ router.post(
   validator.body(validators.auth.login),
   handle(async (req, res) => {
     /*  #swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to login with user credentials.' */
+        #swagger.description = 'Endpoint to login with user credentials.'
+        #swagger.path = '/auth/login'  */
     try {
       const { username, password } = req.body;
       const user = await User.findOne({where: { username }});

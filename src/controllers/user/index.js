@@ -17,7 +17,13 @@ router.get(
   validator.query(validators.user.get),
   handle(async (req, res) => {
     /*  #swagger.tags = ['User']
-        #swagger.description = 'Endpoint to get the specific user or all users.' */
+        #swagger.description = 'Endpoint to get the specific user or all users.' 
+        #swagger.path = '/user'
+        #swagger.parameters['obj'] = {
+          in: 'header',
+          description: 'JWT Token given at login. Expires in 1d.',
+          name: 'authorization"
+        }  */
     try {
       const users = await User.findAll({
         where: req.query,
@@ -36,7 +42,19 @@ router.post(
   validator.body(validators.user.post),
   handle(async (req, res) => {
     /*  #swagger.tags = ['User']
-        #swagger.description = 'Endpoint to create users.' */
+        #swagger.description = 'Endpoint to create users.
+        #swagger.path = '/user'  
+        #swagger.parameters['obj'] = {
+          in: 'body',
+          description: 'User data.',
+          required: true,
+          schema: {
+              "email": "string",
+              "username": "string",
+              "password": "string",
+          }
+        }    
+    */
     try {
       const user = req.body;
       const alreadyExistsEmailPromise = User.findOne({
@@ -76,12 +94,28 @@ router.put(
   validator.query(validators.user.put),
   handle(async (req, res) => {
     /*  #swagger.tags = ['User']
-        #swagger.description = 'Endpoint to update users.' */
+        #swagger.description = 'Endpoint to update users.' 
+        #swagger.path = '/user/{id}'
+        #swagger.parameters['obj'] = {
+          in: 'header',
+          description: 'JWT Token given at login. Expires in 1d.',
+          name: 'authorization"
+        }  */
     try {
       const { id } = req.params;
-      const userData = req.body;
+      const { email, password } = req.body;
 
-      const user = await User.findById(id);
+      const updateObject = {};
+      if (email) {
+        updateObject.email = email;
+      }
+      if (password) {
+        const salt = await bcrypt.genSalt(8);
+        const hash = await bcrypt.hash(password, salt);
+        updateObject.password = hash;
+      }
+
+      const user = await User.findById({id});
       await user.update(userData);
       await user.save();
     } catch (err) {
@@ -97,7 +131,13 @@ router.delete(
   validator.params(validators.user.userId),
   handle(async (req, res) => {
     /*  #swagger.tags = ['User']
-        #swagger.description = 'Endpoint to remove users.' */
+        #swagger.description = 'Endpoint to remove users.' 
+        #swagger.path = '/user/{id}'
+        #swagger.parameters['obj'] = {
+          in: 'header',
+          description: 'JWT Token given at login. Expires in 1d.',
+          name: 'authorization"
+        }  */
     try {
       const { id } = req.params;
       const user = await User.findById(id);
