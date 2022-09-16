@@ -36,10 +36,8 @@
 <h1 align="center" id="to-do">À Fazer</h1>
 <strong>Alta prioridade:</strong>
 
+- [ ] Refatoração usando Clean Architecture/SOLID
 - [ ] Testes Unitários
-  - [ ] Validators
-  - [ ] Controllers
-  - [ ] Middlewares
 - [ ] Testes de Integração
   - [ ] Banco
 
